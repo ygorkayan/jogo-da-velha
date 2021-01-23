@@ -3,7 +3,16 @@ import Painel from "./components/Painel/Painel";
 import Tabuleiro from "./components/Tabuleiro/Tabuleiro";
 import { ITabuleiro, fazerJogada, teveVencedor } from "./Logica";
 
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+const StyledGlobal = createGlobalStyle`
+  * {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+`;
 
 const Container = styled.div`
   width: 100vw;
@@ -25,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     if (teveVencedor(tabuleiro, jogadorAtual)) {
-      alert(`Jogador ${jogadorAtual} venceu!!`);
+      alert(`Jogador ${jogadorAtual === 1 ? "X" : "O"} venceu!!`);
       setjogadorVitoriso(jogadorAtual);
     } else {
       setJogadorAtual(jogadorAtual === 1 ? 2 : 1);
@@ -34,6 +43,7 @@ export default function App() {
 
   return (
     <Container>
+      <StyledGlobal />
       <Painel jogadorAtual={jogadorAtual} />
       <Tabuleiro
         tabuleiro={tabuleiro}
